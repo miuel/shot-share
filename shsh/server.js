@@ -7,12 +7,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var passport = require('passport');
-var shshClient = require('shsh-client');
+var shsh = require('shsh-client');
 var auth = require('./auth');
 
 var config = require('./config');
 
-var client = shshClient.createClient(config.client);
+var client = shsh.createClient(config.client);
 
 var s3 = new aws.S3({
 	accessKeyId: config.aws.accessKey,
@@ -78,7 +78,7 @@ app.post('/signup', function (req, res) {
     if (err) return res.status(500).send(err.message);
 
     res.redirect('/signin');
-  });
+  })
 });
 
 app.get('/signin', function (req, res) {
@@ -127,9 +127,9 @@ app.get('/api/pictures', function (req, res, next) {
 });
 
 app.post('/api/pictures', ensureAuth, function (req, res) {
-	upload(req, res, function(err) {
+	upload(req, res, function (err) {
 		if (err) {
-			return res.send(500, "Error uploading file");
+			return res.status(500).send("Error uploading file");
 		}
 		res.send('File uploaded successfully');
 	})
