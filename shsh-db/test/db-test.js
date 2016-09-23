@@ -39,8 +39,8 @@ test('save image', async t => {
   t.is(created.url, image.url)
   t.is(created.likes, image.likes)
   t.is(created.liked, image.liked)
-  t.is(created.userId, image.userId)
   t.deepEqual(created.tags, [ 'awesome', 'tags', 'shsh' ])
+  t.is(created.userId, image.userId)
   t.is(typeof created.id, 'string')
   t.is(created.publicId, uuid.encode(created.id))
   t.truthy(created.createdAt)
@@ -62,7 +62,7 @@ test('like image', async t => {
 test('get image', async t => {
   let db = t.context.db
 
-  t.is(typeof db.getImages, 'function', 'getImages is a function')
+  t.is(typeof db.getImage, 'function', 'getImage is a function')
   let image = fixtures.getImage()
   let created = await db.saveImage(image)
   let result = await db.getImage(created.publicId)
