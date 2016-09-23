@@ -1,13 +1,12 @@
 'use strict'
-const r = require('rethinkdb')
 const co = require('co')
+const r = require('rethinkdb')
 const Promise = require('bluebird')
 const uuid = require('uuid-base62')
 const utils = require('./utils')
+const config = require('../config')
 
-const defaults = {
-  host: 'localhost', port: 28015, db: 'shshdb'
-}
+const defaults = config.db
 
 class Db {
   constructor (options) {
@@ -15,6 +14,7 @@ class Db {
     this.host = options.host || defaults.host
     this.port = options.port || defaults.port
     this.db = options.db || defaults.db
+    this.connected = false
     this.setup = options.setup || false
   }
 
@@ -52,8 +52,10 @@ class Db {
         yield r.db(db).tableCreate('users').run(conn)
         yield r.db(db).table('users').indexCreate('username').run(conn)
       }
+
       return conn
     })
+
     return Promise.resolve(setup()).asCallback(callback)
   }
 
@@ -63,7 +65,8 @@ class Db {
     }
 
     this.connected = false
-    return Promise.resolve(this.connection).then((conn) => conn.close())
+    return Promise.resolve(this.connection)
+      .then((conn) => conn.close())
   }
 
   saveImage (image, callback) {
@@ -95,6 +98,7 @@ class Db {
 
       return Promise.resolve(created)
     })
+
     return Promise.resolve(tasks()).asCallback(callback)
   }
 
@@ -155,6 +159,7 @@ class Db {
     let tasks = co.wrap(function * () {
       let conn = yield connection
 
+      yield r.db(db).table('images').indexWait().run(conn)
       let images = yield r.db(db).table('images').orderBy({
         index: r.desc('createdAt')
       }).run(conn)
@@ -162,89 +167,6 @@ class Db {
       let result = yield images.toArray()
 
       return Promise.resolve(result)
-    })
-
-    return Promise.resolve(tasks()).asCallback(callback)
-  }
-
-  saveUser (user, callback) {
-    if (!this.connected) {
-      return Promise.reject(new Error('not connected')).asCallback(callback)
-    }
-
-    let connection = this.connection
-    let db = this.db
-
-    let tasks = co.wrap(function * () {
-      let conn = yield connection
-      user.password = utils.encrypt(user.password)
-      user.createdAt = new Date()
-
-      let result = yield r.db(db).table('users').insert(user).run(conn)
-
-      if (result.erros > 0) {
-        return Promise.reject(new Error(result.first_error))
-      }
-
-      user.id = result.generated_keys[0]
-
-      let created = yield r.db(db).table('users').get(user.id).run(conn)
-
-      return Promise.resolve(created)
-    })
-
-    return Promise.resolve(tasks()).asCallback(callback)
-  }
-
-  getUser (username, callback) {
-    if (!this.connected) {
-      return Promise.reject(new Error('not connected')).asCallback(callback)
-    }
-    let connection = this.connection
-    let db = this.db
-
-    let tasks = co.wrap(function * () {
-      let conn = yield connection
-
-      yield r.db(db).table('users').indexWait().run(conn)
-
-      let users = yield r.db(db).table('users').getAll(username, {
-        index: 'username'
-      }).run(conn)
-
-      let result = null
-
-      try {
-        result = yield users.next()
-      } catch (e) {
-        return Promise.reject(new Error(`user ${username} not found`))
-      }
-
-      return Promise.resolve(result)
-    })
-
-    return Promise.resolve(tasks()).asCallback(callback)
-  }
-
-  authenticate (username, password, callback) {
-    if (!this.connected) {
-      return Promise.reject(new Error('not connected')).asCallback(callback)
-    }
-
-    let getUser = this.getUser.bind(this)
-
-    let tasks = co.wrap(function * () {
-      let user = null
-      try {
-        user = yield getUser(username)
-      } catch (e) {
-        return Promise.resolve(false)
-      }
-      if (user.password === utils.encrypt(password)) {
-        return Promise.resolve(true)
-      }
-
-      return Promise.resolve(false)
     })
 
     return Promise.resolve(tasks()).asCallback(callback)
@@ -294,6 +216,90 @@ class Db {
       let result = yield images.toArray()
 
       return Promise.resolve(result)
+    })
+
+    return Promise.resolve(tasks()).asCallback(callback)
+  }
+
+  saveUser (user, callback) {
+    if (!this.connected) {
+      return Promise.reject(new Error('not connected')).asCallback(callback)
+    }
+
+    let connection = this.connection
+    let db = this.db
+
+    let tasks = co.wrap(function * () {
+      let conn = yield connection
+      user.password = utils.encrypt(user.password)
+      user.createdAt = new Date()
+
+      let result = yield r.db(db).table('users').insert(user).run(conn)
+
+      if (result.erros > 0) {
+        return Promise.reject(new Error(result.first_error))
+      }
+
+      user.id = result.generated_keys[0]
+
+      let created = yield r.db(db).table('users').get(user.id).run(conn)
+
+      return Promise.resolve(created)
+    })
+
+    return Promise.resolve(tasks()).asCallback(callback)
+  }
+
+  getUser (username, callback) {
+    if (!this.connected) {
+      return Promise.reject(new Error('not connected')).asCallback(callback)
+    }
+
+    let connection = this.connection
+    let db = this.db
+
+    let tasks = co.wrap(function * () {
+      let conn = yield connection
+
+      yield r.db(db).table('users').indexWait().run(conn)
+      let users = yield r.db(db).table('users').getAll(username, {
+        index: 'username'
+      }).run(conn)
+
+      let result = null
+
+      try {
+        result = yield users.next()
+      } catch (e) {
+        return Promise.reject(new Error(`user ${username} not found`))
+      }
+
+      return Promise.resolve(result)
+    })
+
+    return Promise.resolve(tasks()).asCallback(callback)
+  }
+
+  authenticate (username, password, callback) {
+    if (!this.connected) {
+      return Promise.reject(new Error('not connected')).asCallback(callback)
+    }
+
+    let getUser = this.getUser.bind(this)
+
+    let tasks = co.wrap(function * () {
+      let user = null
+      try {
+        user = yield getUser(username)
+      } catch (e) {
+        return Promise.resolve(false)
+      }
+
+      if (user.password === utils.encrypt(password)) {
+        return Promise.resolve(true)
+      }
+
+      return Promise.resolve(false)
     })
 
     return Promise.resolve(tasks()).asCallback(callback)
