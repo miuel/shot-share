@@ -46,7 +46,7 @@ module.exports = async function main (req, res) {
       await match.handler(req, res, match.params)
     } catch (e) {
       console.log(e)
-      send(res, 500, { error: e.message })
+      send(res, 555, { error: e.message })
     }
   } else {
     send(res, 404, { error: 'route not found' })
