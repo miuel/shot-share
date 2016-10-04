@@ -1,2 +1,2 @@
 # shot-share
-repositorio incompleto de la app
+app incomplete yet
