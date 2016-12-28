@@ -7,9 +7,9 @@ class Client {
   constructor (options) {
     this.options = options || {
       endpoints: {
-        pictures: 'http://api.shsh.com/picture',
-        users: 'http://api.shsh.com/user',
-        auth: 'http://api.shsh.com/auth'
+        pictures: 'http://api.shotandshare.com/picture',
+        users: 'http://api.shotandshare.com/user',
+        auth: 'http://api.shotandshare.com/auth'
       }
     }
   }
@@ -24,6 +24,16 @@ class Client {
     return Promise.resolve(request(opts)).asCallback(callback)
   }
 
+  likePicture (id, callback) {
+    let opts = {
+      method: 'POST',
+      uri: `${this.options.endpoints.pictures}/${id}/like`,
+      json: true
+    }
+
+    return Promise.resolve(request(opts)).asCallback(callback)
+  }
+
   savePicture (picture, token, callback) {
     let opts = {
       method: 'POST',
@@ -32,16 +42,6 @@ class Client {
       headers: {
         'Authorization': `Bearer ${token}`
       },
-      json: true
-    }
-
-    return Promise.resolve(request(opts)).asCallback(callback)
-  }
-
-  likePicture (id, callback) {
-    let opts = {
-      method: 'POST',
-      uri: `${this.options.endpoints.pictures}/${id}/like`,
       json: true
     }
 

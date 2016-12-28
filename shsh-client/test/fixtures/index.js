@@ -28,7 +28,7 @@ const fixtures = {
     return {
       id: uuid.uuid(),
       name: 'A random user',
-      usermane: 'maikol',
+      username: `user_${uuid.v4()}`,
       createdAt: new Date().toString()
     }
   }
