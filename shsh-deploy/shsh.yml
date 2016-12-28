@@ -1,0 +1,20 @@
+---
+- hosts: shsh*
+  pre_tasks:
+    - name: Update apt repository
+      apt: update_cache=yes
+  roles: 
+    - shsh
+  vars: 
+    - projects:
+      - shsh-db
+      - shsh-client
+      - shsh-api
+      - shsh-ws
+      - shsh
+    - services:
+      - shsh-api-pictures
+      - shsh-api-users
+      - shsh-api-auth
+      - shsh-ws
+      - shsh

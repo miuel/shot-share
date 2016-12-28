@@ -1,0 +1,34 @@
+{
+  "name": "shsh-ws",
+  "version": "1.0.0",
+  "description": "Shot & Share Real Time Backend",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "start": "node server.js"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miuel/shsh-ws.git"
+  },
+  "author": "Miguel A. Rivas <rivasmig@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miuel/shsh-ws/issues"
+  },
+  "homepage": "https://github.com/miuel/shsh-ws#readme",
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "standard": "^8.4.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.3",
+    "co": "^4.6.0",
+    "rethinkdb": "^2.3.2",
+    "socket.io": "^1.5.0",
+    "uuid-base62": "^0.1.0"
+  }
+}

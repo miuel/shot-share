@@ -1,0 +1,33 @@
+{
+  "name": "shsh-db",
+  "version": "1.0.0",
+  "description": "Shot & Share Database Client",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "test": "npm run lint && ava"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miuel/shsh-db.git"
+  },
+  "author": "Miguel A. Rivas <rivasmig@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miuel/shsh-db/issues"
+  },
+  "homepage": "https://github.com/miuel/shsh-db#readme",
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "babel-eslint": "^6.1.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.3",
+    "co": "^4.6.0",
+    "rethinkdb": "^2.3.2",
+    "uuid-base62": "^0.1.0"
+  }
+}
