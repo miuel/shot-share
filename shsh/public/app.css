@@ -6452,13 +6452,16 @@ body {
   width: 80%;
   overflow-y: auto; }
 
+.modal.modal-fixed-footer {
+  width: 80%; }
+
 .modal .modal-footer {
   border-radius: 0 0 2px 2px;
   background-color: #fafafa;
   padding: 4px 6px;
   height: 60px;
   width: 20%;
-  right: 2%;
+  right: 5%;
   top: 2%; }
 
 .modal-fixed-footer .modal-content {
@@ -6470,7 +6473,9 @@ body {
   border-top: none; }
 
 .chip {
-  margin: 20px 0; }
+  width: 200px;
+  margin: 20px 10px 20px 0;
+  padding: 0; }
 
 .like-heart {
   font-size: 10em;
@@ -6487,3 +6492,14 @@ body {
     display: block;
     transition: all .5s ease-in;
     opacity: 1; }
+
+.btn-large {
+  position: absolute; }
+
+@media only screen and (max-width: 992px) {
+  .btn-large {
+    position: absolute;
+    right: 10px; }
+  nav .brand-logo {
+    position: absolute;
+    left: 25% !important; } }

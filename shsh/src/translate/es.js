@@ -4,7 +4,7 @@ module.exports = {
 	'english': 'Inglés',
 	'spanish': 'Español',
 	'signup.subheading': 'Regístrate para ver fotos de tus amigos en Shot & Share',
-	'signup.facebook': 'Iniciar sesión con Facebook',
+	'signup.facebook': 'Iniciar con Facebook',
 	'signup.text': 'Iniciar sesión',
 	'email': 'Correo electrónico',
 	'username': 'Nombre de usuario',

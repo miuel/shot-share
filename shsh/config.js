@@ -7,14 +7,20 @@ const config = {
   },
   client: {
     endpoints: {
-      pictures: 'http://api.shsh.com/picture',
-      users: 'http://api.shsh.com/user',
-      auth: 'http://api.shsh.com/auth'
+      pictures: 'http://api.shotandshare.com/picture',
+      users: 'http://api.shotandshare.com/user',
+      auth: 'http://api.shotandshare.com/auth'
+    }
+  },
+  auth: {
+    facebook: {
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      callbackURL: 'http://shotandshare.com/auth/facebook/callback'
     }
   },
   secret: process.env.SHSH_SECRET || 'shshcl4v3'
 }
-
 // For development use local micro instances
 if (process.env.NODE_ENV !== 'production') {
   config.client.endpoints = {
@@ -22,6 +28,8 @@ if (process.env.NODE_ENV !== 'production') {
     users: 'http://localhost:5001',
     auth: 'http://localhost:5002'
   }
+  
+  config.auth.facebook.callbackURL = 'http://shotandshare.test:5050/auth/facebook/callback'
 }
 
 module.exports = config
