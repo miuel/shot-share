@@ -1,8 +1,11 @@
 'use strict'
 
-const { send, json } = require('micro')
+const micro = require('micro')
+const json = micro.json
+const send = micro.send
 const HttpHash = require('http-hash')
 const Db = require('shsh-db')
+const gravatar = require('gravatar')
 const config = require('./config')
 const DbStub = require('./test/stub/db')
 
@@ -17,11 +20,13 @@ const hash = HttpHash()
 
 hash.set('POST /', async function saveUser (req, res, params) {
   let user = await json(req)
+
+  
   await db.connect()
   let created = await db.saveUser(user)
 
-  delete created.email
   delete created.password
+  delete created.email
 
   send(res, 201, created)
 })
@@ -29,12 +34,17 @@ hash.set('POST /', async function saveUser (req, res, params) {
 hash.set('GET /:username', async function getUser (req, res, params) {
   let username = params.username
   await db.connect()
+
   let user = await db.getUser(username)
+  user.avatar = gravatar.url(user.email)
 
-  delete user.email
+  let images = await db.getImagesByUser(username)
+  user.pictures = images
+
   delete user.password
+  delete user.email
 
-  send(res, 200, user, console.error())
+  send(res, 200, user)
 })
 
 module.exports = async function main (req, res) {
@@ -45,8 +55,7 @@ module.exports = async function main (req, res) {
     try {
       await match.handler(req, res, match.params)
     } catch (e) {
-      console.log(e)
-      send(res, 555, { error: e.message })
+      send(res, 500, { error: e.message })
     }
   } else {
     send(res, 404, { error: 'route not found' })

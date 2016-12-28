@@ -30,10 +30,10 @@ module.exports = {
 
   getUser () {
     return {
-      id: '3423203sosungil235',
-      name: 'Miguel Rivas',
-      username: 'maikol',
-      email: 'mr@test.com',
+      id: 'f632db90-d6bf-46f0-9fb1-4eb6912cbdb4',
+      name: 'Elliot Robot',
+      username: 'Mr Robot',
+      email: 'mrrobot@test.com',
       password: 'shshcl4v3',
       createdAt: new Date().toString()
 

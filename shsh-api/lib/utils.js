@@ -26,7 +26,7 @@ module.exports = {
   async extracToken (req) {
     return new Promise((resolve, reject) => {
       berarer(req, (err, token) => {
-        if (err) return reject(err)
+        if (err) return reject(token)
         resolve(token)
       })
     })

@@ -1,7 +1,9 @@
 'use strict'
 
 const HttpHash = require('http-hash')
-const { send, json } = require('micro')
+const micro = require('micro')
+const json = micro.json
+const send = micro.send
 const Db = require('shsh-db')
 const config = require('./config')
 const utils = require('./lib/utils')
@@ -74,7 +76,7 @@ module.exports = async function main (req, res) {
     try {
       await match.handler(req, res, match.params)
     } catch (e) {
-      send(res, 555, { error: e.message })
+      send(res, 500, { error: e.message })
     }
   } else {
     send(res, 404, { error: 'route not found' })
