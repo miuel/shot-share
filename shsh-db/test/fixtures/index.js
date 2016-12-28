@@ -6,7 +6,7 @@ const fixtures = {
   getImage () {
     return {
       description: 'an #awesome picture with #tags #shsh',
-      url: `http://shsh.test/${uuid.v4()}.jpg`,
+      url: `https://shsh.test/${uuid.v4()}.jpg`,
       likes: 0,
       liked: false,
       userId: uuid.uuid()
