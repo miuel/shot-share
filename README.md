@@ -36,3 +36,7 @@ Utiliza Passport.js para autenticar usuarios
 Escribe JavaScript respetando Standard
 Compra y configura un dominio para tu app
 Crea un entorno de desarrollo con Vagrant
+
+![alt text](https://github.com/miuel/shot-share/blob/master/profile.png)
+![alt text](https://github.com/miuel/shot-share/blob/master/wall.png)
+![alt text](https://github.com/miuel/shot-share/blob/master/signup.png)
