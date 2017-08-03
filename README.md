@@ -1,6 +1,4 @@
-http://shotandshare.com/
-
-es el resultado final del curso definitivo de javascrpt, me gustaria adjuntar el temario del curso para que se sepa a grandes rasgos todo lo que se ha visto en él.
+Es el resultado final del curso definitivo de javascrpt, me gustaria adjuntar el temario del curso para que se sepa a grandes rasgos todo lo que se ha visto en él.
 Temario del curso
 
 Construye tu primer Single Page Application
