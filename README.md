@@ -1,38 +1,29 @@
-Es el resultado final del curso definitivo de javascrpt, me gustaria adjuntar el temario del curso para que se sepa a grandes rasgos todo lo que se ha visto en él.
-Temario del curso
+Es el resultado final del curso definitivo de javascrpt
 
-Construye tu primer Single Page Application
-Conviertete en un full stack JavaScript developer
-Introducción a Node.js y NPM
-Inicia tu proyecto con NPM
-Gestiona las dependencias de tu proyecto
-Aprende sobre gestores de paquetes
-Crea tu primer web server con Express
-Automatiza tareas con Gulp
-Construye tu aplicación usando browserify
-Crea estilos utilizando Sass
-Usa Pug (Jade) como motor de templates desde el backend
-Sirve archivos estáticos desde Express
-Crea la interacción de tu sitios con JavaScript en el cliente
-Utiliza las funcionalidades de ES2015 y ES2016 ya mismo
-Implementa navegación interna (rutas) con Page.js
-Configura tu entorno de desarrollo
-Genera interfaces de usuario con Yo-yo
-Muestra de manera amigable fechas con MomentJS
-Soporta multiples idiomas para tu sitios con FormatJS
-Aprende a conectar a cualquier API
-Superagent, Axios, Fetch y Async/Await: ¿Cuál usar?
-Sube tus archivos a tu servidor usando multer
-Lleva tu proyecto a producción con Ansible
-Realiza tests unitarios con AVA
-Hostea tu aplicación en Digital Ocean
-Almacena archivos en Amazon S3
-Logra realtime gracias a Socket.io
-Almacena los datos en RethinkDb
-Login con Facebook y correo electrónico
-Utiliza Passport.js para autenticar usuarios
-Escribe JavaScript respetando Standard
-Compra y configura un dominio para tu app
+Single Page Application
+Desarrollo bajo Node.js y NPM
+gestionando dependencias del proyecto (package.json)
+Web server con Express
+Tareas automatizadas con Gulp
+Browserify
+Estilos utilizando Sass
+Use Pug (Jade) como motor de templates desde el backend
+Funcionalidades de ES2015 y ES2016
+Navegación interna (rutas) con Page.js
+Interfaces de usuario con Yo-yo
+Fechas amigable con MomentJS
+Soporta idiomas español-ingles gracias FormatJS
+Aplicando Promesas Async/Await
+Usando multer para subir el proyecto a un servidor
+Proyecto en producción utilizando con Ansible
+Tests unitarios con AVA
+Aplicación hosteada en Digital Ocean
+Archivos almacenados en Amazon S3
+Realtime gracias a Socket.io
+Datos almacenados en RethinkDb
+Login con Facebook y correo electrónico. Con Passport.js para autenticar usuarios
+
+
 Crea un entorno de desarrollo con Vagrant
 
 ![alt text](https://github.com/miuel/shot-share/blob/master/profile.png)
