@@ -24,8 +24,6 @@ Datos almacenados en RethinkDb
 Login con Facebook y correo electrónico. Con Passport.js para autenticar usuarios
 
 
-Crea un entorno de desarrollo con Vagrant
-
 ![alt text](https://github.com/miuel/shot-share/blob/master/profile.png)
 ![alt text](https://github.com/miuel/shot-share/blob/master/wall.png)
 ![alt text](https://github.com/miuel/shot-share/blob/master/signup.png)
